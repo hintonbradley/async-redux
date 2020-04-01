@@ -1,0 +1,125 @@
+***************************
+** Routing Functionality **
+***************************
+1. Create a React app
+	$ create-react-app <app_name>
+
+2. Install React-Router
+	$ npm install react-router-dom
+
+3. In your /src folder, create a folder called Components and create your components that will act as landing pages.
+	import React from 'react';
+
+	function Instructions() {
+		return (
+			<div className="instructions">
+				<h1>This is the Instructions page</h1>
+			</div>
+		);
+	}
+
+	export default Instructions;
+
+4. Create your Navigation component
+	import React from 'react';
+
+	function Nav() {
+		return (
+			<nav className="nav">
+				<h3>Logo</h3>
+				<ul className="nav-links">
+					<li>Home</li>
+					<li>Instructions</li>
+				</ul>
+			</nav>
+		);
+	}
+
+	export default Nav;
+
+5. Import all components into the App.js file.
+	import React from 'react';
+	import Nav from './Components/Nav';
+	import Home from './Components/Home';
+	import Instructions from './Components/Instructions';
+
+	function App() {
+		return (
+			<div className="app">
+				<Nav />
+				<Home />
+				<Instructions />
+			</div>
+		);
+	}
+
+	export default App;
+
+6. Add App.css file and add styling.
+    .app {
+        text-align: center;
+    }
+
+    .nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        min-height: 10vh;
+        background: lightblue;
+        color: white;
+    }
+
+    .nav-links {
+        width: 40%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        list-style: none;
+    }
+
+7. In the App.js file, import React Router Dom (specifically BrowswerRouter and rename to Router) and add Switch and Route.
+	...
+	import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+
+	function App() {
+	...
+
+8. Wrap all components you want to have Browser ability in the <Router> tags in your App.js file.
+	...
+	<Router>
+		<div className="app">
+			<Nav />
+			<Home />
+			<Instructions />
+		</div>
+	</Router>
+	...
+
+9. Use Route to render out a component based on the url in the App.js file. For each path, we're going to add a <Route> tag and add attributes 'path' and 'component' to specify which component goes with which path, like in the example below:
+i.e. Instead of 
+	...
+	<Instructions />
+	...
+we will have...
+	...
+	<Route path="/instructions" component={Instructions} />
+	...
+
+10. For the Home component "/" add a route and use exact to match the path exactly.
+	<Route path="/" exact component={Home} />
+
+12. Add a Switch tag to wrap all the Route components so that if the Router finds the first matching route, it will be prevented from displaying any other components after.
+	...
+    <Switch>
+			<Route path="/instructions" component={Instructions} />
+			<Route path="/" exact component={Home} />
+		</Switch>
+	...
+
+13. To add link functionality in the Nav component, import Link from React in the Nav.js file, and update your links using Router Links.
+	...
+	import {Link} from 'react-router-dom';
+	...
+	<Link to='/instructions'>
+    <li>Instructions</li>
+  </Link>

@@ -1,0 +1,31 @@
+.nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 10vh;
+  background: lightblue;
+  color: white;
+}
+
+.nav ul {
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links {
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+}
+
+.nav-links.left {
+  justify-content: center;
+  display: inline-flex;
+  width: 20%;
+}
+
+.nav-links.right {
+  width: 80%;
+}
