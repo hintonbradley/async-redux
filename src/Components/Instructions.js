@@ -148,6 +148,14 @@ function Instructions() {
                 {type:'image',text:'Payload response',name:'payloadResponse',classes:'img-sm center'},
                 {type:'text',text:'...so in your Action Creator index.js file, change "response" to "response.data" so that only the data value will be returned.'},
                 {type:'image',text:'Updating payload response',name:'acResponse',classes:'img-sm center'},
+            ]} />
+
+< Instruction card="light" obj={[
+                {type:'header',text:'Presenting data in UI'},
+                {type:'text',text:'We create a new method to present the data in the UI to keep the render method clean. In this method, we map through the data and return JSX for each element.'},
+                {type:'image',text:'Showing data in component',name:'dataUI',classes:'img-sm center'},
+                {type:'text',text:'Then we call the new method (renderList) in the render method to show it in the UI when the component is rendered. (Note: we first wrap the renderList method in a wrapper div so it doesn\'t throw an error'},
+                {type:'image',text:'rendering the list',name:'renderingList',classes:'img-sm center'},
             ]} /> 
 
             {/* < Instruction card="light" obj={[
