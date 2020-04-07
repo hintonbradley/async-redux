@@ -1,6 +1,5 @@
 import React from 'react';
 import Instruction from './InstructionDetail';
-import {Link} from 'react-router-dom';
 
 function Instructions() {
 	return (
@@ -62,8 +61,8 @@ function Instructions() {
                 {type:'text',text:'Create an action creator in the newly created file src/actions/index.js to fetch data from the API.'},
                 {type:'image',text:'Data Loading Outline',name:'createFetchPosts',classes:'img-xs center'},
                 {type:'text',text:'Wire up the newly created Action Creator by importing the connect function (from react-redux) and the action creator (that you just created).'},
-                {type:'text',text:'We also need to import and call the connect function from the Redux Store.'},
-                {type:'text',text:' - Note that the first argument to the connect method is the method you need to call to retrieve your data (usually mapStateToProps). Since we currently don\'t have access to a mapStateToProps method yet, we instead use null for our first argument (to prevent errors).'},
+                {type:'text',text:'We also need to call the connect function.'},
+                {type:'text',text:' - Note that the first argument to the connect method is the method you need to call to retrieve your data (usually mapStateToProps). Since we currently don\'t have access to a mapStateToProps method yet, we instead use "null" for our first argument (to prevent errors).'},
                 {type:'text',text:' - Note that the second argument to the connect method is a collection of all your Action Creators - in this case it would be fetchPosts that you just imported.'},
                 {type:'text',text:'Finally, we add a lifecycle method (componentDidMount) to fetch our data once the component is rendered.'},
                 {type:'image',text:'Add Action Creator',name:'addActionCreator',classes:'img-sm center'},
@@ -145,23 +144,121 @@ function Instructions() {
                 {type:'image',text:'Defining our state',name:'definedPosts',classes:'img-sm center'},
                 {type:'text',text:'2. We call the mapStateToProps method (which will return the posts object from our state) in our connect method. This will add the posts object as a prop in our component.'},
                 {type:'text',text:'3. We can console.log and view our object to be sure we are receiveing the correct data from our Redux Store.'},
-                {type:'image',text:'Payload response',name:'payloadResponse',classes:'img-sm center'},
+                {type:'image',text:'Payload response',name:'payloadResponse',classes:'img-lg center'},
                 {type:'text',text:'...so in your Action Creator index.js file, change "response" to "response.data" so that only the data value will be returned.'},
-                {type:'image',text:'Updating payload response',name:'acResponse',classes:'img-sm center'},
+                {type:'image',text:'Updating payload response',name:'acResponse',classes:'img-md center'},
             ]} />
 
-< Instruction card="light" obj={[
+            < Instruction card="light" obj={[
                 {type:'header',text:'Presenting data in UI'},
                 {type:'text',text:'We create a new method to present the data in the UI to keep the render method clean. In this method, we map through the data and return JSX for each element.'},
-                {type:'image',text:'Showing data in component',name:'dataUI',classes:'img-sm center'},
+                {type:'image',text:'Showing data in component',name:'dataUI',classes:'img-md center'},
                 {type:'text',text:'Then we call the new method (renderList) in the render method to show it in the UI when the component is rendered. (Note: we first wrap the renderList method in a wrapper div so it doesn\'t throw an error'},
-                {type:'image',text:'rendering the list',name:'renderingList',classes:'img-sm center'},
+                {type:'image',text:'rendering the list',name:'renderingList',classes:'img-md center'},
             ]} /> 
 
-            {/* < Instruction card="light" obj={[
-                {type:'text',text:'Create an action creator to fetch data from the API.'},
-                {type:'image',text:'Creating Fetch Data Action',name:'createFetchData',classes:'img-md center'}
-            ]} /> */}
+            < Instruction card="dark" obj={[
+                {type:'header',text:'Set up to fetch user data'},
+                {type:'text',text:'Each post has a userId. We are going to take that id for each post and return the user data. This means we have to make another API call after our initial API call.'},
+                {type:'image',text:'Fetch UserId setup',name:'userIdSetup',classes:'img-lg center'},
+                {type:'text',text:'The process of how we will fetch our user data (and posts data) is below.'},
+                {type:'image',text:'How we fetch our data',name:'fetchProcess',classes:'img-lg center'},
+                {type:'text',text:'The process of how we will fetch all data and process it is below:'},
+                {type:'image',text:'How we fetch our data',name:'fetchingUserProcess',classes:'img-lg center'},
+            ]} /> 
+
+            < Instruction card="light" obj={[
+                {type:'header',text:'Creating Action Creator to fetch User'},
+                {type:'text',text:'In the "actions/index.js" file, this Action Creator will look very similar to our fetchPosts action creator we already created. The main difference being we need to pass in the id and use it in our endpoint to fetch a particular user\'s data.'},
+                {type:'image',text:'Create User Action Creator',name:'userAC',classes:'img-lg center'}
+            ]} /> 
+
+            < Instruction card="light" obj={[
+                {type:'header',text:'Create a component to display User info'},
+                {type:'text',text:'Create a new UserHeader component'},
+                {type:'image',text:'Create a new UserHeader component',name:'userHeaderComponent',classes:'img-lg center'},
+                {type:'text',text:'Import the new component so it displays on your page. Be sure to pass in the userId as a prop so it can reference it when the component calls an Action Creator.'},
+                {type:'image',text:'Import User Header componenet',name:'importUserHeaderComponent',classes:'img-lg center'},
+                {type:'text', classes: "last success", text:'Checkpoint: OK'},
+            ]} /> 
+
+            < Instruction card="light" obj={[
+                {type:'header',text:'Updating UserHeader Component'},
+                {type:'text',text:'1. Import the "connect" method from React-Redux to allow React component to connect to the Redux Store.'},
+                {type:'text',text:'2. Import the fetchUser Action Creator so it can be called when this component is rendered.'},
+                {type:'text',text:'3. We then call the connect function when we export the file. (For an explanation of this, see "Create Action Creators"'},
+                {type:'text',text:'4. In the componentDidMount method, we need to call the fetchUser Action Creator with the userId that was passed down to us in the props object, so we can display the User information when this component is rendered.'},
+                {type:'image',text:'Updating the UserHeader component',name:'updatingUserHeader',classes:'img-lg center'}
+            ]} /> 
+
+            < Instruction card="dark" obj={[
+                {type:'header',text:'Flow for fetching user information'},
+                {type:'image',text:'Fetching user information flow',name:'fetchUserFlow',classes:'img-lg center'}
+            ]} /> 
+
+            < Instruction card="light" obj={[
+                {type:'header',text:'Creating and wiring up a new Reducer'},
+                {type:'text',text:'In the reducers folder, create a new file and add the typical boilerplate below:'},
+                {type:'image',text:'User Reducer file',name:'userReducer',classes:'img-lg center'},
+                {type:'text',text:'In the reducers index.js file, add your new Reducer:'},
+                {type:'image',text:'Adding User Reducer file',name:'addingUsersReducer',classes:'img-lg center'}
+            ]} /> 
+
+            < Instruction card="light" obj={[
+                {type:'header',text:'Giving UserHeader component access to Redux level State'},
+                {type:'text',text:'Note: if you understand what\'s going on, simply skip to the next section for the refactor.'},
+                {type:'text',text:'1. Add the mapStateToProps function to give the component access to the Redux Store State.'},
+                {type:'text',text:'2. In that function we return all the users from the Redux State object.'},
+                {type:'text',text:'3. In the render method, iterate through the list of users to find the user that has the id given in this.props.users.'},
+                {type:'text',text:'4. If no user is found, then nothing is displayed.'},
+                {type:'text',text:'5. If a user is found, then display the user\'s name.'},
+                {type:'text',text:'6. Add the mapStateToProps method to the connect function.'},
+                {type:'image',text:'User Reducer file',name:'userHeaderUpdate',classes:'img-lg center'},
+            ]} /> 
+            < Instruction card="light" obj={[
+                {type:'header',text:'Refactor of the UserHeader component.'},
+                {type:'text',text:'1. Instead of finding the specific user in the render method, we instead move it to the mapStateToProps method.'},
+                {type:'text',text:'2. In order to get access to this components props, we use the "ownProps" argument in the mapStateToProps method. We then use that to compare the user.id from our Redux State, with this component\'s userId prop.'},
+                {type:'text',text:'3. Since we are returning one user, we change the property from "users" to "user".'},
+                {type:'text',text:'4. In the render method, we get access to the "user" property. We do this by destructuring the value off of the props object.'},
+                {type:'image',text:'User Reducer file',name:'refactorUserHeader',classes:'img-lg center'},
+            ]} />
+            < Instruction card="dark" obj={[
+                {type:'header',text:'Action Creator to fetch Posts and Users'},
+                {type:'image',text:'The fetch posts and users Action Creator',name:'fetchPostsAndUsersProcess',classes:'img-lg center'}
+            ]} />  
+
+            < Instruction card="light" obj={[
+                {type:'header',text:'Calling an Action Creator inside an Action Creator'},
+                {type:'image',text:'Calling an Action Creator inside an Action Creator',name:'callingACInsideAC',classes:'img-lg center'},
+                {type:'text',text:'1. We call an Action Creator inside another Action Creator.'},
+                {type:'text',text:'2. That call invokes the action creator (function), that returns an inner function.'},
+                {type:'text',text:'3. We dispatch that inner function.'},
+                {type:'text',text:'4. Whenever we dispatch a function, Redux-Thunk will pick it up and (using dispatch as an argument) will automatically invoke it. Once it makes the call to the API and returns the data, it dispatches the Action Creator to all the Reducers.'},
+                {type:'image',text:'Calling an Action Creator inside an Action Creator',name:'ACInsideAC',classes:'img-lg center'}
+            ]} /> 
+
+            < Instruction card="light" obj={[
+                {type:'header',text:'Wire up fetchPostsAndUsers Action Creator (in PostList Component)'},
+                {type:'text',text:'1. First we must inport the new Action Creator to our component.'},
+                {type:'text',text:'2. Then we need to call the new Action Creator in the componentDidMount method. Note: we commented out the original fetchPosts method since we will not be using that in the componentDidMount method.'},
+                {type:'image',text:'Wiring up new Action Creator',name:'wireUpNewAC',classes:'img-lg center'},
+                {type:'text',text:'3. In the connect function, we swap out the old Action Creator (fetchPosts), with our new one - fetchPostsAndUsers.'},
+                {type:'image',text:'Connecting new Action Creator',name:'connectingNewAC',classes:'img-lg center'}
+            ]} /> 
+
+            < Instruction card="light" obj={[
+                {type:'header',text:'Update Action Creator to fetch unique user\'s info'},
+                {type:'image',text:'Getting and fetching unique users',name:'fetchUniqueUsers',classes:'img-lg center'},
+            ]} /> 
+
+            < Instruction card="light" obj={[
+                {type:'header',text:'Update Action Creator to fetch unique user\'s info'},
+                {type:'text',text:'1. Since we now have the fetchPostsAndUsers Action Creator fetching all data, we don\'t need to use fetchUser Action Creator in this component. (Component will update automatically when state.users is updated).'},
+                {type:'text',text:'2. Remove the import of fetchUser.'},
+                {type:'text',text:'3. Remove fetchUser from connect function.'},
+                {type:'image',text:'Updating User Component',name:'updateUserNameComponent',classes:'img-lg center'},
+            ]} /> 
 
 		</div>
 	);

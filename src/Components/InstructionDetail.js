@@ -3,7 +3,6 @@ import './InstructionDetail.css';
 
 class Instruction extends React.Component {
     
-
     render () {
         return (
             <div className={`card card-${ this.props.card }`}>
